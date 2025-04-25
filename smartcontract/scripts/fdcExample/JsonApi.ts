@@ -9,7 +9,7 @@ const { JQ_VERIFIER_URL_TESTNET, JQ_VERIFIER_API_KEY_TESTNET, COSTON2_DA_LAYER_U
 // yarn hardhat run scripts/fdcExample/JsonApi.ts --network coston2
 
 // Request data
-const apiUrl = "https://swapi.dev/api/people/3/";
+const apiUrl = "https://raw.githubusercontent.com/nikerzetic-aflabs/public-api/refs/heads/main/swapi.json";
 const postprocessJq = `{name: .name, height: .height, mass: .mass, numberOfFilms: .films | length, uid: (.url | split("/") | .[-2] | tonumber)}`;
 const abiSignature = `{"components": [{"internalType": "string", "name": "name", "type": "string"},{"internalType": "uint256", "name": "height", "type": "uint256"},{"internalType": "uint256", "name": "mass", "type": "uint256"},{"internalType": "uint256", "name": "numberOfFilms", "type": "uint256"},{"internalType": "uint256", "name": "uid", "type": "uint256"}],"name": "task","type": "tuple"}`;
 

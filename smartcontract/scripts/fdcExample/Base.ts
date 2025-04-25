@@ -77,19 +77,21 @@ async function prepareAttestationRequestBase(
     requestBody: requestBody,
   };
   console.log("Prepared request:\n", request, "\n");
-
+  console.log("url: ", url);
   const response = await fetch(url, {
     method: "POST",
     headers: {
-      "X-API-KEY": apiKey,
+      "X-API-KEY": "flare-oxford-2025",
       "Content-Type": "application/json",
     },
     body: JSON.stringify(request),
   });
+
+  //console.log("response: ", response);
   if (response.status != 200) {
     throw new Error(`Response status is not OK, status ${response.status} ${response.statusText}\n`);
   }
-  console.log("Response status is OK\n");
+  console.log("Response status is OK\n", response);
 
   return await response.json();
 }
@@ -134,7 +136,7 @@ async function postRequestToDALayer(url: string, request: any, watchStatus: bool
   const response = await fetch(url, {
     method: "POST",
     headers: {
-      //   "X-API-KEY": "",
+      "X-API-KEY": "flare-oxford-2025",
       "Content-Type": "application/json",
     },
     body: JSON.stringify(request),
