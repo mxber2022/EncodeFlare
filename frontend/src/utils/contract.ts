@@ -8,15 +8,22 @@ const ABI = [
   "event WinnerSelected(string[] names, string winner, address sender, uint256 timestamp)",
 ];
 
+const getProvider = async () => {
+  if (!window.ethereum) {
+    throw new Error(
+      "No injected provider found. Please install a Web3 wallet."
+    );
+  }
+  return new ethers.BrowserProvider(window.ethereum);
+};
+
 export const getRandomNumber = async (): Promise<number> => {
   try {
-    const provider = new ethers.JsonRpcProvider(
-      "https://flare-testnet-coston2.rpc.thirdweb.com"
-    );
+    const provider = await getProvider();
     const contract = new ethers.Contract(CONTRACT_ADDRESS, ABI, provider);
 
     const [randomNumber, isSecure] = await contract.getSecureRandomNumber();
-    console.log("randomNumber: ", randomNumber);
+    console.log("Random number from contract:", randomNumber);
 
     if (!isSecure) {
       throw new Error("Random number is not secure");
@@ -33,9 +40,7 @@ export const getRandomNumber = async (): Promise<number> => {
 
 export const selectWinner = async (names: string[]): Promise<string> => {
   try {
-    const provider = new ethers.JsonRpcProvider(
-      "https://flare-testnet-coston2.rpc.thirdweb.com"
-    );
+    const provider = await getProvider();
     const signer = await provider.getSigner();
     const contract = new ethers.Contract(CONTRACT_ADDRESS, ABI, signer);
 
