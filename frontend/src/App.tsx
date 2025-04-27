@@ -1,15 +1,18 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import RaffleCreator from './pages/RaffleCreator';
-import RaffleResults from './pages/RaffleResults';
-import SpinnerGame from './pages/SpinnerGame';
-import Layout from './components/Layout';
-import { RaffleProvider } from './context/RaffleContext';
-import './config/appkit';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import RaffleCreator from "./pages/RaffleCreator";
+import RaffleResults from "./pages/RaffleResults";
+import SpinnerGame from "./pages/SpinnerGame";
+import Layout from "./components/Layout";
+import TransactionStatus from "./components/TransactionStatus";
+import { RaffleProvider, useRaffle } from "./context/RaffleContext";
+import "./config/appkit";
 
-function App() {
+const AppContent = () => {
+  const { transaction } = useRaffle();
+
   return (
-    <RaffleProvider>
+    <>
       <Router>
         <Routes>
           <Route path="/" element={<Layout />}>
@@ -19,6 +22,15 @@ function App() {
           </Route>
         </Routes>
       </Router>
+      <TransactionStatus transaction={transaction} />
+    </>
+  );
+};
+
+function App() {
+  return (
+    <RaffleProvider>
+      <AppContent />
     </RaffleProvider>
   );
 }
