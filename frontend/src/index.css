@@ -1,0 +1,179 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    @apply bg-dark text-pink;
+  }
+
+  ::selection {
+    @apply bg-pink/20 text-pink;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply backdrop-blur-xl bg-dark-light/30 border border-pink/10;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-pink to-purple bg-clip-text text-transparent;
+  }
+
+  .bg-mesh {
+    @apply bg-gradient-mesh bg-[length:24px_24px];
+  }
+
+  .button-hover {
+    @apply relative overflow-hidden;
+  }
+
+  .input-focus-animation {
+    @apply transition-all duration-300;
+  }
+
+  .card-hover {
+    @apply transition-all duration-300;
+  }
+
+  .tooltip {
+    @apply relative;
+  }
+
+  .custom-checkbox {
+    @apply relative;
+  }
+
+  .custom-checkbox input[type="checkbox"] {
+    @apply absolute opacity-0;
+  }
+
+  .custom-checkbox input[type="checkbox"] + label {
+    @apply pl-8 relative cursor-pointer select-none;
+  }
+}
+
+@layer utilities {
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-dark;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-pink/20 hover:bg-pink/30 transition-colors rounded-full;
+  }
+
+  /* Input styles */
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+
+  /* Focus styles */
+  input:focus, select:focus, button:focus {
+    @apply outline-none;
+  }
+
+  input:focus, select:focus {
+    @apply ring-0 border-pink/30;
+  }
+
+  button:focus-visible {
+    @apply ring-2 ring-pink/20 ring-offset-2 ring-offset-dark rounded-xl;
+  }
+
+  /* Button hover effects */
+  .button-hover::after {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-r from-pink/10 to-purple/10 opacity-0 transition-opacity;
+  }
+
+  .button-hover:hover::after {
+    @apply opacity-100;
+  }
+
+  /* Input focus animation */
+  .input-focus-animation:focus {
+    @apply transform scale-[1.02];
+  }
+
+  /* Card hover animation */
+  .card-hover:hover {
+    @apply transform -translate-y-1;
+  }
+
+  /* Tooltip styles */
+  .tooltip::after {
+    content: attr(data-tooltip);
+    @apply absolute left-1/2 -translate-x-1/2 bottom-full mb-2 px-3 py-1 
+      bg-dark-lighter text-pink text-sm rounded-lg opacity-0 invisible
+      transition-all duration-200 whitespace-nowrap;
+  }
+
+  .tooltip:hover::after {
+    @apply opacity-100 visible mb-3;
+  }
+
+  /* Custom checkbox styles */
+  .custom-checkbox input[type="checkbox"] + label::before {
+    content: '';
+    @apply absolute left-0 top-1/2 -translate-y-1/2 w-5 h-5 border-2 border-pink/30 
+      rounded transition-all duration-200;
+  }
+
+  .custom-checkbox input[type="checkbox"]:checked + label::before {
+    @apply bg-pink border-pink;
+  }
+
+  .custom-checkbox input[type="checkbox"]:checked + label::after {
+    content: '';
+    @apply absolute left-[6px] top-[4px] w-2 h-4 border-r-2 border-b-2 
+      border-white transform rotate-45;
+  }
+
+  /* Gradient animation */
+  @keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  .animate-gradient {
+    animation: gradient 8s linear infinite;
+  }
+
+  /* Shake animation for errors */
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-2px); }
+    20%, 40%, 60%, 80% { transform: translateX(2px); }
+  }
+
+  .animate-shake {
+    animation: shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  }
+}
+
+/* Custom select styles */
+select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23FF4D94'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+  background-position: right 1rem center;
+  background-repeat: no-repeat;
+  background-size: 1.5em 1.5em;
+  padding-right: 2.5rem;
+}
