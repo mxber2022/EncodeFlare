@@ -44,7 +44,7 @@ contract StarWarsCharacterList {
 
         characters[dto.apiUid] = character;
         characterIds.push(dto.apiUid);
-    }
+    } 
 
     function getAllCharacters() public view returns (StarWarsCharacter[] memory) {
         StarWarsCharacter[] memory result = new StarWarsCharacter[](characterIds.length);

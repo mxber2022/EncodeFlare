@@ -91,7 +91,7 @@ async function prepareAttestationRequestBase(
   if (response.status != 200) {
     throw new Error(`Response status is not OK, status ${response.status} ${response.statusText}\n`);
   }
-  console.log("Response status is OK\n", response);
+  // console.log("Response status is OK\n", response);
 
   return await response.json();
 }
